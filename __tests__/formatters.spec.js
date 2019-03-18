@@ -11,4 +11,9 @@ describe('converter', () => {
     expect(result).toBe('this is [google](https://google.com/)')
   })
 
+  it('converts brs', () => {
+    const result = converter.convert('line one.<br />line 2.');
+    expect(result).toBe('line one.\nline 2.')
+  })
+
 })

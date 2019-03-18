@@ -16,6 +16,7 @@ var blockQuoteRegex = /<blockquote>([\s\S]*?)<\/blockquote>/gim
 var boldRegex = /<(?:b|strong)>([\s\S]*?)<\/\w*>/gim
 var italicRegex = /<(?:i|em)>([\s\S]*?)<\/\w*>/gim
 var hrefRegex = /<a href=['|"](.+)['|"]>(.+)<\/a>/gim
+var brRegex = /<br \/>/gim
 
 /**
  * @description executes a regex to replace matched text with
@@ -146,6 +147,10 @@ function replaceHref (doc) {
   })
 }
 
+function replaceBr (doc) {
+  return doc.replace(brRegex, '\n');
+}
+
 /**
  * @description replaces li tags with equalent markup based
  * upon their parent tag
@@ -189,4 +194,4 @@ function addHashes (count) {
 }
 
 
-module.exports = [replaceHeading,replaceParagraph,replacePre,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote,replaceHref]
+module.exports = [replaceHeading,replaceParagraph,replacePre,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote,replaceHref, replaceBr]
