@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/thetutlage/html-to-markdown/issues"
   },
-  "homepage": "https://github.com/thetutlage/html-to-markdown#readme"
+  "homepage": "https://github.com/thetutlage/html-to-markdown#readme",
+  "devDependencies": {
+    "jest": "^24.5.0"
+  }
 }

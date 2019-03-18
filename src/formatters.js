@@ -15,6 +15,7 @@ var preRegex = /<pre>([\s\S]*?)<\/pre>/gim
 var blockQuoteRegex = /<blockquote>([\s\S]*?)<\/blockquote>/gim
 var boldRegex = /<(?:b|strong)>([\s\S]*?)<\/\w*>/gim
 var italicRegex = /<(?:i|em)>([\s\S]*?)<\/\w*>/gim
+var hrefRegex = /<a href=['|"](.+)['|"]>(.+)<\/a>/gim
 
 /**
  * @description executes a regex to replace matched text with
@@ -37,7 +38,7 @@ function makeRegex (regex, doc, before, after, replaceFn) {
       if(replaceFn && typeof(replaceFn) === 'function'){
         replaceText = replaceFn(matches)
       }
-      replaceString += replaceText + "\n";
+      replaceString += replaceText;
       replaceString += after || '';
       newDoc = newDoc.replace(matches[0],replaceString);
     }
@@ -125,7 +126,7 @@ function replaceBlockQuote (doc) {
  * @return {String}           [description]
  */
 function replaceBold (doc) {
-  return makeRegex(boldRegex, doc, '** ', ' **');
+  return makeRegex(boldRegex, doc, '**', '**');
 }
 
 /**
@@ -136,7 +137,13 @@ function replaceBold (doc) {
  * @return {String}           [description]
  */
 function replaceItalic (doc) {
-  return makeRegex(italicRegex, doc, '* ', ' *');
+  return makeRegex(italicRegex, doc, '*', '*');
+}
+
+function replaceHref (doc) {
+  return makeRegex(hrefRegex, doc, null, null, function(match) {
+    return `[${match[2]}](${match[1]})`
+  })
 }
 
 /**
@@ -181,4 +188,5 @@ function addHashes (count) {
   return string;
 }
 
-module.exports = [replaceHeading,replaceParagraph,replacePre,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote]
+
+module.exports = [replaceHeading,replaceParagraph,replacePre,replaceUl,replaceOl,replaceBold,replaceItalic,replaceBlockQuote,replaceHref]

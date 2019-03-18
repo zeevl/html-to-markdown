@@ -1,3 +1,9 @@
+Forked from what appears to be a project no longer maintained. 
+
+Added support for hrefs, the start of some tests.
+
+
+
 # Html to markdown converter
 
 Html to markdown converter is a dependency free converter which replaces html with a valid markdown syntax. I have just started working on it, so all tags may not be supported.
@@ -8,6 +14,7 @@ Html to markdown converter is a dependency free converter which replaces html wi
 2. NodeJs
 
 ## Tags Supported
+
 
 1. h1,h2,h3,h4,h5,h6
 2. p
