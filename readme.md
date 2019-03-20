@@ -1,20 +1,13 @@
-Forked from what appears to be a project no longer maintained. 
-
-Added support for hrefs, the start of some tests.
 
 
+# React-Native Html to markdown converter
 
-# Html to markdown converter
+A simple html to markdown converter that converts html to markdown, using no
+dependencies.   Perfect for react-native.
 
-Html to markdown converter is a dependency free converter which replaces html with a valid markdown syntax. I have just started working on it, so all tags may not be supported.
-
-## Supported Platforms
-
-1. Web browsers.
-2. NodeJs
+My own use case for this is quite simple.  If it doesn't quite fit yours, PRs are welcome!
 
 ## Tags Supported
-
 
 1. h1,h2,h3,h4,h5,h6
 2. p
@@ -23,6 +16,8 @@ Html to markdown converter is a dependency free converter which replaces html wi
 5. pre
 6. bold,strong
 7. italic,em
+8. a 
+9. br
 
 ## Converting Html Documents
 
@@ -40,3 +35,10 @@ converter.use(function (html) {
   // and return new html
 })
 ```
+
+
+## credits
+This was forked from https://github.com/thetutlage/html-to-markdown, which was 
+a good start but is no longer maintained.
+
+
