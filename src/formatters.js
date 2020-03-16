@@ -94,7 +94,7 @@ function replaceOl (doc) {
  * @return {String}           [description]
  */
 function replaceParagraph (doc) {
-  return makeRegex(pRegex, doc);
+  return makeRegex(pRegex, doc, '', '\n\n');
 }
 
 /**
