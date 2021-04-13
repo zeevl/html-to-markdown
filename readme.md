@@ -28,10 +28,19 @@ const markdown = htmlToMd('<h2> Happy Journey </h2>');
 
 ## Extending to add your own formatters.
 
+Here an example to replace an image tag with 'yourstring'
 ```javascript
 import htmlToMd, {addFormatter} from "react-native-html-to-markdown";
-addFormatter('name', function (...))
 
+const imgRegex = new RegExp(/<img[^>]* src=\"([^\"]*)\"[^>]*>/, `gim`)
+
+const replaceImg =  (doc) => {
+  return doc.replace(imgRegex, 'yourstring');
+}
+
+addFormatter('replaceImg', replaceImg)
+
+const markdown = htmlToMd('text <img src="some" alt="test"> other');
 ```
 
 

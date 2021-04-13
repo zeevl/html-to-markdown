@@ -1,4 +1,4 @@
-import htmlToMd from "../src";
+import htmlToMd, {addFormatter} from "../src";
 
 describe('converter', () => {
   it('converts bold marks', () => {
@@ -19,6 +19,18 @@ describe('converter', () => {
   it('converts brs', () => {
     const result = htmlToMd('line one.<br />line 2.');
     expect(result).toBe('line one.\nline 2.')
+  })
+
+  it('example of custom formatter', () => {
+    const imgRegex = new RegExp(/<img[^>]* src=\"([^\"]*)\"[^>]*>/, `gim`)
+
+    const replaceImg =  (doc) => {
+      return doc.replace(imgRegex, 'img');
+    }
+
+    addFormatter('replaceImg', replaceImg)
+    const result = htmlToMd('text <img src="some" alt="test"> other');
+    expect(result).toBe('text img other')
   })
 
 })
