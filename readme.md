@@ -22,18 +22,25 @@ My own use case for this is quite simple.  If it doesn't quite fit yours, PRs ar
 ## Converting Html Documents
 
 ```javascript
-var converter = require('html-to-markdown');
-var markdown = converter.convert('<h2> Happy Journey </h2>');
+import htmlToMd from "react-native-html-to-markdown";
+const markdown = htmlToMd('<h2> Happy Journey </h2>');
 ```
 
 ## Extending to add your own formatters.
 
+Here an example to replace an image tag with 'yourstring'
 ```javascript
-var converter = require('html-to-markdown');
-converter.use(function (html) {
-  // making required changes
-  // and return new html
-})
+import htmlToMd, {addFormatter} from "react-native-html-to-markdown";
+
+const imgRegex = new RegExp(/<img[^>]* src=\"([^\"]*)\"[^>]*>/, `gim`)
+
+const replaceImg =  (doc) => {
+  return doc.replace(imgRegex, 'yourstring');
+}
+
+addFormatter('replaceImg', replaceImg)
+
+const markdown = htmlToMd('text <img src="some" alt="test"> other');
 ```
 
 

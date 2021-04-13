@@ -1,9 +1,5 @@
-'use strict';
 
-/**
- * html-to-markdown
- * Copyright(c) 2015-2015 Harminder Virk
- * MIT Licensed
-*/
+import htmlToMd, {addFormatter} from "./src";
 
-module.exports = require('./src/index.js');
+export const addFormatter = addFormatter
+export default htmlToMd
