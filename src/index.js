@@ -1,63 +1,61 @@
-'use strict';
-
 /**
  * html-to-markdown
  * Copyright(c) 2015-2015 Harminder Virk
  * MIT Licensed
-*/
+ */
+import Formatters from './formatters';
 
-var formatters = require('./formatters');
-var extrasRegex = /<\/?(?:div|address|section|article|span)>/gim
-
+const extrasRegex = /<\/?(?:div|address|section|article|span)>/gim
+const relRegExp = new RegExp(/rel=['|"](.+)['|"]/, `gim`)
+const targetRegEx = new RegExp(/rel=['|"](.+)['|"]/, `gim`)
 /**
  * @description replacing unncessary html tags
  * @method replaceExtras
  * @param  {String}      doc
  * @return {String}
  */
-function replaceExtras(doc) {
-  var matches = [];
-  var newDoc = doc;
-  newDoc = newDoc.replace(extrasRegex,'');
+const replaceExtras = (doc) => {
+  let matches = [];
+  let newDoc = doc;
+  newDoc = newDoc.replace(extrasRegex, '');
+  newDoc = newDoc.replace(relRegExp, '');
+  newDoc = newDoc.replace(targetRegEx, '');
+  console.log(newDoc)
   return newDoc
 }
 
-module.exports = {
+
+/**
+ * @description converts given html to a markdown
+ * document
+ * @method convert
+ * @param  {String} html
+ * @return {String}
+ */
+const htmlToMd = (html) => {
 
   /**
-   * @description converts given html to a markdown
-   * document
-   * @method convert
-   * @param  {String} html
-   * @return {String}
+   * replacing unncessary html tags
+   * @type {String}
    */
-  convert: function (html) {
-
-    /**
-     * replacing unncessary html tags
-     * @type {String}
-     */
-    html = replaceExtras(html);
-
-    /**
-     * looping through registered formatters
-     */
-    for(var x=0;x<formatters.length; x++){
-      var formatter = formatters[x];
-      if(typeof(formatter) === 'function'){
-        html = formatter(html)
-      }
-    }
-    return html;
-  },
+  html = replaceExtras(html);
 
   /**
-   * adding a new formatter to the list of formatters
-   * @method use
-   * @param  {Function} formatter
-   * @return {void}
+   * looping through registered formatters
    */
-  use: function (formatter) {
-    formatters.push(formatter)
-  }
+
+  Object.values(Formatters).forEach(f => {
+    html = f(html)
+  })
+  return html;
 }
+
+
+export const addFormatter = (name,formatter) =>{
+  Formatters[name] = formatter
+}
+
+
+export default htmlToMd
+
+

@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/zeevl/react-native-html-to-markdown#readme",
   "devDependencies": {
-    "jest": "^24.5.0"
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "jest": "^25.5.4"
+  },
+  "dependencies": {
+    "@babel/core": "^7.0.0-0"
   }
 }
